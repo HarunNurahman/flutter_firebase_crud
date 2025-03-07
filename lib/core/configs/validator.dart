@@ -9,7 +9,7 @@ String? emailValidator(String? value) {
   if (!emailRegExp.hasMatch(value)) {
     return 'Please enter a valid email';
   }
-  return '';
+  return null;
 }
 
 String? phoneValidator(String? value) {
@@ -21,5 +21,5 @@ String? phoneValidator(String? value) {
   if (!phoneRegExp.hasMatch(value)) {
     return 'Please enter a valid phone number';
   }
-  return '';
+  return null;
 }

@@ -6,6 +6,7 @@ Color blackColor = const Color(0xFF101010);
 Color grayColor = const Color(0xFFD9D9D9);
 Color blueColor = const Color(0xFF0984E3);
 Color redColor = const Color(0xFFD63031);
+Color greenColor = const Color(0xFF00B894);
 
 TextStyle blackTextStyle = GoogleFonts.poppins(color: blackColor, fontSize: 14);
 TextStyle whiteTextStyle = GoogleFonts.poppins(color: whiteColor, fontSize: 14);
