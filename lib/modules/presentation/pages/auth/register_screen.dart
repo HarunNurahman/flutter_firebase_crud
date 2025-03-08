@@ -87,11 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   BlocConsumer<AuthBloc, AuthState>(
                     listener: (context, state) {
                       if (state is AuthRegisterSuccessState) {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          '/login',
-                          (route) => false,
-                        );
+                        Navigator.pushNamed(context, '/');
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
