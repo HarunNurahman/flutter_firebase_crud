@@ -17,6 +17,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
@@ -26,9 +27,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocProvider(
       create: (context) => AuthBloc(),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+
             child: Form(
               key: formKey,
               child: Column(
@@ -63,6 +66,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     validator: emailValidator,
                   ),
                   CustomTextField(
+                    controller: phoneController,
+                    label: 'Mobile Phone',
+                    hintText: 'Enter your phone number',
+                    keyboardType: TextInputType.number,
+                    validator: phoneValidator,
+                  ),
+                  CustomTextField(
                     controller: passwordController,
                     label: 'Password',
                     hintText: 'Enter your password',
@@ -77,25 +87,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   BlocConsumer<AuthBloc, AuthState>(
                     listener: (context, state) {
                       if (state is AuthRegisterSuccessState) {
-                        print('Current State: $state');
-
                         Navigator.pushNamedAndRemoveUntil(
                           context,
-                          '/home',
+                          '/login',
                           (route) => false,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'Register Success',
+                              'Register success, please login',
                               style: whiteTextStyle,
                             ),
                             backgroundColor: greenColor,
                           ),
                         );
                       } else if (state is AuthRegisterErrorState) {
-                        print('Current State: $state');
-
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -108,7 +114,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                     },
                     builder: (context, state) {
-                      print('Current State: $state');
                       if (state is AuthRegisterLoadingState) {
                         return const Center(child: CircularProgressIndicator());
                       }
@@ -121,6 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 name: nameController.text,
                                 email: emailController.text,
                                 password: passwordController.text,
+                                phone: phoneController.text,
                               ),
                             );
                           }

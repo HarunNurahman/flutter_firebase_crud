@@ -20,35 +20,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
-    context.read<AuthBloc>().add(AuthCheckCurrentUserEvent());
-    // Timer(Duration(seconds: 2), () {
-    //   User? user = FirebaseAuth.instance.currentUser;
-
-    //   if (user != null) {
-    //     Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
-    //   }
-    // });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context.read<AuthBloc>().add(AuthCheckCurrentUserEvent());
+  // }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthCheckCurrentUserSuccessState) {
-          print('Current State: $state');
-
           Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
         }
 
         if (state is AuthLoginSuccessState) {
-          print('Current State: $state');
           Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
         } else if (state is AuthLoginErrorState) {
-          print('Current State: $state');
-
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
