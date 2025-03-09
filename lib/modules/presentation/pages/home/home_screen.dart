@@ -164,7 +164,6 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
         builder: (context, state) {
-          print('Current State: $state');
           if (state is ReadAllMemberLoadingState ||
               state is DeleteMemberLoadingState) {
             return const Center(child: CircularProgressIndicator());
