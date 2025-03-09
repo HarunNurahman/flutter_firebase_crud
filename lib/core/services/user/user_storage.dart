@@ -8,7 +8,7 @@ class UserStorage {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(_userKey, userId);
     } catch (e) {
-      print('Error saving user: $e');
+      throw Exception(e);
     }
   }
 
@@ -17,8 +17,7 @@ class UserStorage {
       final prefs = await SharedPreferences.getInstance();
       return prefs.getString(_userKey);
     } catch (e) {
-      print('Error getting user: $e');
-      return null;
+      throw Exception(e);
     }
   }
 
@@ -27,7 +26,7 @@ class UserStorage {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove(_userKey);
     } catch (e) {
-      print('Error removing user: $e');
+      throw Exception(e);
     }
   }
 
